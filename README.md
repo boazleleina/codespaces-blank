@@ -1,4 +1,4 @@
-#Semantic Vector Search API (FastAPI + Pinecone + EmbeddingGemma)
+# Semantic Vector Search API (FastAPI + Pinecone + EmbeddingGemma)
 
 This repository contains a production-ready, serverless Retrieval-Augmented Generation (RAG) backend that demonstrates the paradigm shift from traditional keyword matching (lexical search) to conceptual matching (semantic search). 
 
