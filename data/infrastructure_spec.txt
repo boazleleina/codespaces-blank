@@ -1,0 +1,11 @@
+Cloud Architecture and Infrastructure Specification
+Version: 2.4
+Classification: Internal Use Only
+
+Our core infrastructure is hosted entirely within Amazon Web Services (AWS) across multiple availability zones to ensure 99.99% uptime. 
+
+To handle sudden web traffic spikes and flash crowds, the primary web application layer utilizes AWS Auto Scaling Groups configured with step scaling policies. When aggregate CPU utilization across the fleet exceeds 65% for consecutive evaluation periods, the system automatically provisions additional EC2 instances. A network load balancer distributes incoming traffic evenly across these active nodes.
+
+Fronting our application is an AWS Web Application Firewall (WAF) integrated with Amazon CloudFront. The WAF is configured with rate-limiting rules to mitigate Distributed Denial of Service (DDoS) attacks, automatically blocking source IP addresses that exceed 2,000 requests per minute.
+
+Database layers utilize Amazon RDS PostgreSQL in a Multi-AZ deployment. High-dimensional data arrays called embeddings are offloaded to an external Pinecone vector database cluster to prevent memory exhaustion on primary transactional databases. Systems that learn from data are decoupled via asynchronous message queues managed by Amazon EventBridge.
